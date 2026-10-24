@@ -6,7 +6,7 @@ of pharmaceutical supply chains under drug shortages). Contact: riordan.a@northe
 ## Papers
 
 ### [Large Language Models for Metaheuristic Implementation: A Case Study with Variable Neighborhood Search](https://link.springer.com/chapter/10.1007/978-3-032-19582-1_11)
-*Springer Lecture Notes in Computer Science, 2025 — first author*
+*ICVNS 2025, Springer Lecture Notes in Computer Science 16256, 2026 — first author · [code](https://github.com/riordanaa/llm-metaheuristic-replication)*
 
 Metaheuristics are widely used in combinatorial optimization but take real expertise and engineering effort
 to implement. We ask whether current LLMs can turn a state-of-the-art algorithm description into performant
