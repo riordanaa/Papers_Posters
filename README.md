@@ -29,8 +29,40 @@ formulation of the search space), adaptability (it hybridizes naturally with oth
 public code repositories and problem libraries, documented real-world implementations, engagement across
 metaheuristics, and popularizing VNS as an accessible technique.
 
-### The Jessamine Symbolic Regression System and a Reliability Approach to Benchmarking
-*Submitted, Evolutionary Computation — co-author (manuscript on request)*
+### [The Jessamine Symbolic Regression System and a Reliability Approach to Benchmarking](2026-jessamine-symbolic-regression-reliability-preprint.pdf)
+*Preprint, under review at Evolutionary Computation (MIT Press) — W. Garrett Mitchener, Aiden Camilleri, Aidan Riordan, Latherial Calbert — co-author*
+
+Symbolic regression searches for a prediction function in exact algebraic form, so the model is readable
+rather than a black box. Jessamine is an open-source evolutionary symbolic-regression system in Julia
+([Jessamine.jl](https://github.com/wgm-applied-math/Jessamine.jl)). Instead of evolving expression trees,
+each genome is a flat list of instructions that computes a set of derived features, and the prediction is a
+linear combination of those features. The paper tests it on SRBench and cp3-bench data sets and argues that
+symbolic-regression benchmarks should report how *reliably* an algorithm recovers the true equation, not
+only its best run. This is a preprint and has not yet been peer reviewed.
+
+**Contributions**
+
+- **Flat-genome architecture with three layers of optimization.** Ridge regression fits the linear weights,
+  Nelder–Mead fits the scalar parameters, and an evolutionary search works on the feature functions. Because
+  the model is a sum of terms, a genome that finds one correct term already scores better. Recombination can
+  then merge correct terms found by different individuals into one child.
+- **A reliability metric for stochastic algorithms.** Each data set gets 32 independent 15-minute runs
+  (8 core-hours in total). A Beta posterior over the per-run success rate then gives a 95% credible lower
+  bound on the probability that an 8-hour run recovers the ground-truth equation. The paper proposes this
+  as a reporting standard.
+- **Evidence that mistuned hyper-parameters explain weak benchmark results.** Many benchmarks tune on noisy
+  data and test on noise-free data, or the reverse. On a noisy sin(x) data set, raising the complexity
+  penalty from 1e-12 to 1e-2 turns overfit results into 31 of 32 runs that recover sin(x).
+- **Strong ground-truth recovery.** Jessamine recovers 13 of the 14 Strogatz ODE targets, some of them
+  only with low reliability. The remaining target becomes reliable once cot is added to the operator set.
+  It recovers the Friedman f1 function, including from data with irrelevant distractor columns. It recovers
+  5 of the 8 cp3-bench F functions with very high reliability, while no algorithm in the original cp3-bench
+  study recovered more than four. On several black-box cosmology data sets its error is lower than the best
+  previously reported. One example is C3b, at 3.9e-14 compared with 3.6e-11.
+- **A vocabulary for why symbolic regression fails.** *Series traps* (settling on a Taylor-series
+  approximation), *cruft traps* (overly complicated but accurate expressions) and the *partial-credit
+  problem* (products such as 0.3x·sin 2x, where neither factor alone fits the data). The paper ends with
+  concrete recommendations for designing benchmark data sets.
 
 ## Posters
 
